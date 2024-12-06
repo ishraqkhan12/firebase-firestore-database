@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2 id="msg"></h2>
+    <h2 id="great"></h2>
+    <button type="button" id="signOut">sign out</button>
+    <h1>home</h1>
+
+    <script>
+
+     let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"))
+     let UserInfo = JSON.parse(sessionStorage.getItem("user-info"))
+
+     let msgHead = document.getElementById("msg")
+     let greatHead = document.getElementById("great")
+     let signOutbtn = document.getElementById("signOut")
+        
+   
+
+     const signOut = () =>{
+        sessionStorage.removeItem("user-creds");
+        sessionStorage.removeItem("user-info");
+        window.location.href = "signup.html"
+     }
+
+     const check =()=>{
+        if(!sessionStorage.getItem("user-creds"))
+        window.location.href = "signup.html"
+    else{
+         msgHead.innerText = `user with email ${UserCreds.email} logged in`
+         greatHead.innerText = `welcome ${UserInfo.firstName}  ${UserInfo.lastName}`
+    }
+     }
+     window.addEventListener("load",check)
+     signOutbtn.addEventListener("click", signOut)
+     
+
+
+
+    </script>
+</body>
+</html>
